@@ -43,6 +43,36 @@ window.addEventListener("resize", () => {
     // Update renderer
     renderer.setSize(sizes.width, sizes.height);
 
+    // Set Devices pixel ratio by default most commonly used are below 3 or 2
+    // Set a minimum limit of 2 as the minimum Pixel Ratio
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+/** 
+ * Handle Fullscreen
+ */
+
+window.addEventListener("dblclick", () => {
+
+    // Ternary to check if fullscreen is active or not
+    const fullScreenElement = document.fullscreenElement || document.webkitFullscreenElement 
+
+    if(!fullScreenElement) {
+        if(canvas.requestFullscreen) {
+            canvas.requestFullscreen()
+        } else if(canvas.webkitRequestFullscreen) {
+            canvas.webkitRequestFullscreen();
+        }
+
+    } else {
+        if(document.exitFullscreen) {
+            document.exitFullscreen()
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
+
+
 });
 
 /**
@@ -64,6 +94,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
+
 
 /**
  * Animate
