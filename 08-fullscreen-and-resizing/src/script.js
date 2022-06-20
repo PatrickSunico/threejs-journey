@@ -37,7 +37,7 @@ window.addEventListener("resize", () => {
     sizes.height = window.innerHeight;
 
     // Always update the camera whenever resizing the browser 
-    camera.aspect = sizes.width / sizes.height;
+    camera.spect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
 
     // Update renderer
@@ -53,17 +53,14 @@ window.addEventListener("resize", () => {
  */
 
 window.addEventListener("dblclick", () => {
-
     // Ternary to check if fullscreen is active or not
     const fullScreenElement = document.fullscreenElement || document.webkitFullscreenElement 
-
     if(!fullScreenElement) {
         if(canvas.requestFullscreen) {
             canvas.requestFullscreen()
         } else if(canvas.webkitRequestFullscreen) {
             canvas.webkitRequestFullscreen();
         }
-
     } else {
         if(document.exitFullscreen) {
             document.exitFullscreen()
@@ -71,8 +68,6 @@ window.addEventListener("dblclick", () => {
             document.webkitExitFullscreen();
         }
     }
-
-
 });
 
 /**
