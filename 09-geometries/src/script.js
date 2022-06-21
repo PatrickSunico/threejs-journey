@@ -11,10 +11,67 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Object
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+// Custom Geometry
+const geometry = new THREE.BufferGeometry();
+const material = new THREE.MeshBasicMaterial( {side: THREE.FrontSide,wireframe: true,transparent:false, color: 0xff0000} )
 const mesh = new THREE.Mesh(geometry, material)
+
+// Coordinates 
+// const vertices = [
+//     (Math.random() - 0.5) * 4, // x 
+//     (Math.random() - 0.5) * 4, // y
+//     (Math.random() - 0.5) * 4 // z
+// ]
+
+// console.log(vertices);
+const vertices = [
+    -1, -1, 0,
+    1, -1, 0,
+    1, 1, 0,
+    -1, 1, 0
+];
+
+const indices = [
+    0,1,2,
+    2,3,0
+]
+
+geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+geometry.setIndex(indices);
+
+
+// Coordinates of each point in a vertices
+// const position = new Float32Array( [
+// 	-1.0, -1.0,  1.0,
+// 	 1.0, -1.0,  1.0,
+// 	 1.0,  1.0,  1.0,
+
+// 	 1.0,  1.0,  1.0,
+// 	-1.0,  1.0,  1.0,
+// 	-1.0, -1.0,  1.0
+// ] );
+// console.log(geometry.setAttribute( 'position', new THREE.BufferAttribute( position, 3 ) ));
+
+// var colors = new Float32Array([0,0,1, 0,0,0, 0,0,0])
+// geometry.setAttribute('color', new THREE.BufferAttribute(colors,3))
+
+// let vertices;
+// for(let i = 0; i < 50; i++) {
+//     for(let j =0; j<3; j++) {
+//         vertices = new Float32Array([
+//             (Math.random() - 0.5) * 4, // x 
+//             (Math.random() - 0.5) * 4, // y
+//             (Math.random() - 0.5) * 4 // z
+//         ]);
+//         // console.log(vertices)
+//     }
+//     // console.log(vertices);
+//     console.log(geometry.setAttribute(`position`, new THREE.BufferAttribute(vertices, 3)));
+
+//     // console.log(vertices);
+// }
+
+
 scene.add(mesh)
 
 // Sizes
